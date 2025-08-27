@@ -1,3 +1,5 @@
+#COLUNA NA MATRIZ
+
 #include <stdio.h>
 int main()
 {
