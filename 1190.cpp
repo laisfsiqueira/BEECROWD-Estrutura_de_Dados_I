@@ -1,40 +1,40 @@
-#include <stdio.h>
+#include <iostream>
+#include <vector>
+#include <iomanip>
 
-int main()
-{
-	double M[12][12];
-	char O[2];
-	double sum = 0.0;
-	int aux1 = 11;
-	int aux2 = 1;
-	int i, j;
-	int count = 0;
-	
-	scanf("%s",O);
-	
-	for(i=0;i<12;i++)
-	{
-		for(j=0;j<12;j++)
-		{
-			scanf("%lf",&M[i][j]);
-		}
-	}
-	
-	for(i=11; i>6; i--)
-	{
-		for(j=aux2; j<aux1;j++)
-		{
-			sum += M[j][i];
-			count += 1;
-		}
-		aux1 -= 1;
-		aux2 += 1;
-	}
-	if(O[0] == 'S')
-	{
-		printf("%.1lf\n",sum);
-	}else{
-		printf("%.1lf\n",(sum/count));
-	}
-	
+int main() {
+    char O;
+    std::cin >> O;
+
+    std::vector<std::vector<double>> M(12, std::vector<double>(12));
+
+    for (int i = 0; i < 12; ++i) {
+        for (int j = 0; j < 12; ++j) {
+            std::cin >> M[i][j];
+        }
+    }
+
+    double sum = 0.0;
+    int count = 0;
+
+    for (int i = 0; i < 12; ++i) {
+        for (int j = 0; j < 12; ++j) {
+            // Condição corrigida para a área direita
+            if (j > i && j > (11 - i)) {
+                sum += M[i][j];
+                count++;
+            }
+        }
+    }
+
+    std::cout << std::fixed << std::setprecision(1);
+
+    if (O == 'S') {
+        std::cout << sum << std::endl;
+    } else if (O == 'M') {
+        std::cout << sum / count << std::endl;
+    }
+
+    return 0;
 }
+
